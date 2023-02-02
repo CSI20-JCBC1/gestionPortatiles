@@ -5,6 +5,8 @@ import com.hibernate.dal.GestionPortatiles;
 
 public class ADaoServicioImpl implements ADaoServicio {
 
+	
+	//Paso de AlumnoDTO a Alumno
 	@Override
 	public GestionAlumnos GestionAlumnosDTOADAO(GestionAlumnosDTO gestionAlumnosDTO) {
 		GestionAlumnos gestionAlumnos = new GestionAlumnos();
@@ -19,6 +21,7 @@ public class ADaoServicioImpl implements ADaoServicio {
 		return gestionAlumnos;
 	}
 
+	//Paso de PortatilDTO a Portatil
 	@Override
 	public GestionPortatiles GestionPortatilesDTOADAO(GestionPortatilesDTO gestionPortatilesDTO) {
 		GestionPortatiles gestionPortatiles = new GestionPortatiles();
@@ -30,19 +33,6 @@ public class ADaoServicioImpl implements ADaoServicio {
 			gestionPortatiles.setAlumno(gestionPortatilesDTO.getAlumno());
 		}
 		return gestionPortatiles;
-	}
-
-	@Override
-	public GestionAlumnos GestionAlumnosDTOADAO2(GestionAlumnosDTO gestionAlumnosDTO) {
-		GestionAlumnos gestionAlumnos = new GestionAlumnos();
-		if(gestionAlumnosDTO != null) {
-			gestionAlumnos.setMd_uuid(gestionAlumnosDTO.getMd_uuid());
-			gestionAlumnos.setMd_date(gestionAlumnosDTO.getMd_date());
-			gestionAlumnos.setNombre(gestionAlumnosDTO.getNombre());
-			gestionAlumnos.setApellidos(gestionAlumnosDTO.getApellidos());
-			gestionAlumnos.setNum_telefono(gestionAlumnosDTO.getNum_telefono());
-		}
-		return gestionAlumnos;
 	}
 
 }

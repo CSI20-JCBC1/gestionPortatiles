@@ -12,6 +12,7 @@ import com.hibernate.dal.GestionAlumnos;
 import com.hibernate.dal.GestionAlumnosServicioImpl;
 import com.hibernate.dal.GestionPortatiles;
 import com.hibernate.dal.GestionPortatilesServicioImpl;
+import com.hibernate.dao.GestionPortatilesDTO;
 
 @Service
 public class Consultas {
@@ -21,7 +22,7 @@ public class Consultas {
 	@Autowired
 	private GestionPortatilesServicioImpl gpi;
 	
-	//Consultas de gestión de alumnos
+	//Consultas de gestión de alumnos llamsndo a GestionAlumnosServicioImpl
 	
 	@Transactional
 	public void insertarUnaMatricula(GestionAlumnos gestionAlumnos) {
@@ -45,8 +46,21 @@ public class Consultas {
 		return gai.buscarAlumnoPorId(id);
 	}
 	
+	@Transactional
+    public void eliminarUnAlumno(Integer id) {
+        gai.eliminarAlumno(id);
+    }
 	
-	//Consultas de gestión de ordenadores
+	public GestionAlumnos buscarAlumnoPorIdPortatil(Integer idPort) {
+		return gai.buscarAlumnoPorIdPortatil(idPort);
+	}
+	
+	public List<GestionAlumnos> listaAlumnos(){
+		return gai.buscarTodos();
+	}
+	
+	
+	//Consultas de gestión de portatiles llamando a GestionPortatilesServicioImpl
 
 	@Transactional
 	public void insertarUnOrdenador(GestionPortatiles gestionPortatiles) {
@@ -65,5 +79,10 @@ public class Consultas {
 		return gpi.buscarPortatiles();
 	}
 
+	
+	public GestionPortatiles buscarOrdenadorPorIdAlumno(Integer idAlum) {
+        return gpi.buscarOrdenadorporIdAlum(idAlum);
+    }
+	
 	
 }

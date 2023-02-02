@@ -10,25 +10,16 @@ public class ADtoServicioImpl implements ADtoServicio {
 	@Override
 	public GestionAlumnosDTO AGestionAlumnosDTO(String md_uuid, Calendar md_date, String nombre_alumno,
 			String apellidos_alumno, String num_telefono, GestionPortatiles portatiles) {
-		GestionAlumnosDTO DTO = new GestionAlumnosDTO(md_uuid, md_date, nombre_alumno, apellidos_alumno, 
-				num_telefono, portatiles);
-		
+		GestionAlumnosDTO DTO = new GestionAlumnosDTO(md_uuid, md_date, nombre_alumno, apellidos_alumno, num_telefono,
+				portatiles);
+
 		return DTO;
 	}
 
 	@Override
-	public GestionPortatilesDTO AGestionPortatilesDTO(String md_uuid, Calendar md_date, String modelo, String marca,
-			GestionAlumnos alumno) {
-		GestionPortatilesDTO DTO = new GestionPortatilesDTO(md_uuid, md_date, modelo, marca, alumno);
-		
-		return DTO;
-	}
+	public GestionPortatilesDTO AGestionPortatilesDTO(String md_uuid, Calendar md_date, String modelo, String marca) {
+		GestionPortatilesDTO DTO = new GestionPortatilesDTO(md_uuid, md_date, modelo, marca);
 
-	@Override
-	public GestionAlumnosDTO AGestionAlumnosDTO(String md_uuid, Calendar md_date, String nombre_alumno,
-			String apellidos_alumno, String num_telefono) {
-		GestionAlumnosDTO DTO = new GestionAlumnosDTO(md_uuid, md_date, nombre_alumno, apellidos_alumno, 
-				num_telefono);
 		return DTO;
 	}
 

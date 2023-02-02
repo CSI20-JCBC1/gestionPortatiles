@@ -9,6 +9,5 @@ public interface ADaoServicio {
 
 	public GestionPortatiles GestionPortatilesDTOADAO(GestionPortatilesDTO gestionPortatilesDTO);
 	
-	public GestionAlumnos GestionAlumnosDTOADAO2(GestionAlumnosDTO gestionAlumnosDTO);
 
 }

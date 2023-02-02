@@ -35,11 +35,11 @@ public class Controlador {
 			System.out.println("2.-Baja de un alumno. ");
 			System.out.println("3.-Alta de portátil. ");
 			System.out.println(
-					"4.-Consulta portátil asignado a un alumno (se conoce el número de alumno se busca el portátil). ");
+					"4.-Consulta portátil asignado a un alumno (se conoce el número de alumno se busca el portátil) ");
 			System.out.println(
-					"5.-Consulta alumno asignado a un portátil (se conoce el identificador del portátil se busca el alumno). ");
+					"5.-Consulta alumno asignado a un portátil (se conoce el identificador del portátil se busca el alumno) ");
 			System.out.println(
-					"6.-Consulta alumno asignado a un portátil (se conoce el identificador del portátil se busca el alumno). ");
+					"6.-Ver todos los alumnos con su asignación de portátil");
 			System.out.println("7.-Salir. ");
 
 			System.out.println();
@@ -50,7 +50,7 @@ public class Controlador {
 
 			// DTO para el pago repostaje
 			GestionAlumnosDTO DTO;
-			GestionAlumnos gestionAlumnos;
+			GestionAlumnos gestionAlumnos=new GestionAlumnos();
 
 			// DTO para el control camiones
 			GestionPortatilesDTO DTOPortatiles;
@@ -58,70 +58,93 @@ public class Controlador {
 
 			UUID uuid;
 			String mduuid;
+			List<GestionPortatiles> listaP = consulta.buscarOrdenadores();
+			String nombre, apellidos, telefono;
+			Integer idPortatil;
 
 			switch (opcion1) {
 			case 1:
+				//Creacion de un alumno a mano insertando sus datos a mano
+				
+				//mduuid aleatorio
 				uuid = UUID.randomUUID();
 				mduuid = uuid.toString();
-				System.out.println("Ha escogido la opcion de matricular un alumno");
-				DTO = aDto.AGestionAlumnosDTO(mduuid, fecha, "Juan Carlos", "Bada Carbo", "629223094");
+				System.out.println("Ha escogido la opcion de matricular un alumno, tenga en cuenta que deberá existir al menos un portatil para poder matricular al alumno.");
+				
+				System.out.print("Inserta el nombre del alumno: ");
+				nombre=scan.next();
+				System.out.print("\nInserta los apellidos del alumno: ");
+				apellidos=scan.next();
+				System.out.print("\nInserta el telefono del alumno: ");
+				telefono=scan.next();
+				
+				//Obtenemos el id del portatil que quermos asignar a este alumno y restamos 1 para que el indice coincida con los indices de la lista
+				System.out.print("\nInserta el id del portatil: ");
+				idPortatil=scan.nextInt()-1;
+
+				DTO = aDto.AGestionAlumnosDTO(mduuid,fecha, nombre, apellidos, telefono, listaP.get(idPortatil));
 				gestionAlumnos = aDao.GestionAlumnosDTOADAO(DTO);
-				consulta.insertarUnaMatricula(gestionAlumnos);
+				consulta.insertarUnaMatricula(gestionAlumnos);	
+
 				break;
 			case 2:
-				/*
-				 * System.out.println("Has escogido la opción de repostaje con pago con factura"
-				 * ); DTO = aDto.APagoRepostajeFacturaDTO("rvhfyjkeodkkuhgu3", fecha, 12,
-				 * "7789432Q", "9008BTX", fecha); pagosRepostaje =
-				 * aDao.PagoRepostajeDTOADAO(DTO); consulta.insertarUnRepostaje(pagosRepostaje);
-				 */
+				//Borrar un alumno por su id
+				System.out.println("Ha escogido la opcion de dar de baja a un alumno: ");
+		        System.out.println("Indique el id del alumno que quiere eliminar");
+		        Integer id = scan.nextInt();
+		        consulta.eliminarUnAlumno(id);
+
 				break;
 			case 3:
+				//Creación de un portatil en la base de datos insertando sus campos a mano
 				uuid = UUID.randomUUID();
 				mduuid = uuid.toString();
 				System.out.println("Ha escogido la opción de dar de alta un portátil");
-				System.out.print("Introduzca el id del alumno al que quiere añadir el portatil: ");
-				Integer idAlmn=scan.nextInt();
-				GestionAlumnos alumno=consulta.buscarAlumnoPorId(idAlmn);
-				DTOPortatiles = aDto.AGestionPortatilesDTO(mduuid, fecha, "GTK-656", "DELL", alumno);
-				GestionPortatiles portatil=aDao.GestionPortatilesDTOADAO(DTOPortatiles);
+				System.out.print("Introduzca el modelo del portatil: ");
+				String modelo=scan.next();
+				System.out.print("Introduzca la marca del portatil: ");
+				String marca = scan.next();
+				DTOPortatiles = aDto.AGestionPortatilesDTO(mduuid, fecha, modelo, marca);
+				GestionPortatiles portatil = aDao.GestionPortatilesDTOADAO(DTOPortatiles);
 				consulta.insertarUnOrdenador(portatil);
 				
-				
-
 				break;
 			case 4:
-				/*
-				 * List<PagosRepostaje> repostajes = new ArrayList<PagosRepostaje>(); repostajes
-				 * = consulta.buscarTodos(); int suma=0; for(PagosRepostaje pagos: repostajes) {
-				 * suma+=pagos.getImporte(); }
-				 * System.out.println("La suma de los repostajes es: "+suma+ " euros");
-				 */
+				
+				//Busqueda de un portatil introduciendo el id del alumno
+				System.out.println("Ha escogido la opcion de consulta portátil asignado a un alumno por id de alumno");
+				System.out.println("Introduce el id del alumno para buscar su portatil.");
+				Integer idAlm = scan.nextInt();
+				gestionPrt = consulta.buscarOrdenadorPorIdAlumno(idAlm);
+				System.out.println("El portatil asignado a este alumno es: " + gestionPrt.getMarca());
+				
+				
 				break;
 			case 5:
-				/*
-				 * System.out.println("Has escogido la opción de llenar el depósito");
-				 * DTOCamiones = aDto.AControlCamionesDTO("rvhfyjkeodkkuhgu3", fecha, 30,
-				 * "Gasolina95", 58 ); controlCamiones =
-				 * aDao.ControlCamionesDTOADAO(DTOCamiones);
-				 * consulta.insertarELCombustible(controlCamiones);
-				 */
+				//Busueda de un alumno introduciendo el id del portatil
+				System.out.println("Ha escogido la opcion de consulta alumno asignado a un portatil por id de portatil");
+				System.out.println("Introduce el id del portatil para buscar su alumno.");
+				Integer idPort=scan.nextInt();
+				gestionAlumnos = consulta.buscarAlumnoPorIdPortatil(idPort);
+				System.out.println("El alumno asignado a este portatil es: " + gestionAlumnos.getNombre()+" "+ gestionAlumnos.getApellidos());
+				
 				break;
 			case 6:
-
+				//Listado de todos los alumnos con su portatil asignado
+				List<GestionAlumnos>listaAlumnosPrt= consulta.listaAlumnos();
+				for(GestionAlumnos alumno : listaAlumnosPrt) {
+					System.out.println("Alumno: " + alumno.getNombre() + " " + alumno.getApellidos() + " Portatil: " + alumno.getPortatiles().getMarca()+ " / " +alumno.getPortatiles().getModelo());
+				}
 				break;
 			case 7:
-				/*
-				 * System.out.
-				 * println("Has escogido la opción de ver todos los llenados de depósito");
-				 * System.out.println("Lista depósitos: " + consulta.buscarCamiones());
-				 */
+				//Salida de la aplicacion
+				System.out.println("Saliendo de la aplicacion.");
 				break;
 			default:
 
 			}
 
-		} while (opcion1 != 0);
+		} while (opcion1 != 7);
 	}
 
 }

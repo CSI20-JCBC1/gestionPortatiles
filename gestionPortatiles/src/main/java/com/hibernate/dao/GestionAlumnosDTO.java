@@ -15,8 +15,8 @@ import com.hibernate.dal.GestionPortatiles;
 
 @Component
 public class GestionAlumnosDTO {
-	
-	private String id_alumno;
+	//Campos
+	private Integer id_alumno;
 	private String md_uuid;
 	private Calendar md_date;
 	private String nombre;
@@ -25,10 +25,10 @@ public class GestionAlumnosDTO {
 	GestionPortatiles portatiles;
 	
 	//Getters & Setters
-	public String getId_alumno() {
+	public Integer getId_alumno() {
 		return id_alumno;
 	}
-	public void setId_alumno(String id_alumno) {
+	public void setId_alumno(Integer id_alumno) {
 		this.id_alumno = id_alumno;
 	}
 	public String getMd_uuid() {
@@ -79,16 +79,6 @@ public class GestionAlumnosDTO {
 		this.apellidos = apellidos;
 		this.num_telefono = num_telefono;
 		this.portatiles = portatiles;
-	}
-	
-	public GestionAlumnosDTO(String md_uuid, Calendar md_date, String nombre, String apellidos, String num_telefono) {
-		super();
-		this.md_uuid = md_uuid;
-		this.md_date = md_date;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.num_telefono = num_telefono;
-		
 	}
 	
 	

@@ -8,12 +8,12 @@ import javax.persistence.*;
 @Table(name= "alm_tch_gestion_alumnos", schema= "dlk_gestm_alm_prt")
 public class GestionAlumnos {
 	
-	//Atributos
+	//Campos
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_alumno", unique=true, nullable=false)
-	private String id_alumno;
+	private Integer id_alumno;
 	@Column(name="md_uuid",nullable=false)
 	private String md_uuid;
 	@Column(name="md_date",nullable=false)
@@ -25,15 +25,14 @@ public class GestionAlumnos {
 	private String apellidos;
 	@Column(name="num_telefono",nullable=false)
 	private String num_telefono;
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(name="id_portatil", nullable=true)
+	@OneToOne
 	GestionPortatiles portatiles;
 	
 	//Getters & Setters
-	public String getId_alumno() {
+	public Integer getId_alumno() {
 		return id_alumno;
 	}
-	public void setId_alumno(String id_alumno) {
+	public void setId_alumno(Integer id_alumno) {
 		this.id_alumno = id_alumno;
 	}
 	public String getMd_uuid() {

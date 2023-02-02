@@ -13,7 +13,7 @@ public class GestionPortatiles {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name="id_portatil", unique=true, nullable=false)
-		private String id_ordenador;
+		private Integer id_ordenador;
 		@Column(name="md_uuid",nullable=false)
 		private String md_uuid;
 		@Column(name="md_date",nullable=false)
@@ -23,16 +23,15 @@ public class GestionPortatiles {
 		private String modelo;
 		@Column(name="marca",nullable=false)
 		private String marca;
-		@OneToOne(mappedBy="portatiles", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-		
+		@OneToOne(mappedBy="portatiles")	
 		GestionAlumnos alumno;
 		
 		//Getters & Setters
 		
-		public String getId_ordenador() {
+		public Integer getId_ordenador() {
 			return id_ordenador;
 		}
-		public void setId_ordenador(String id_ordenador) {
+		public void setId_ordenador(Integer id_ordenador) {
 			this.id_ordenador = id_ordenador;
 		}
 		public String getMd_uuid() {
