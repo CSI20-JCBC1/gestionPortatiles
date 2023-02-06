@@ -22,7 +22,7 @@
 		<property name="driverClassName" value="org.postgresql.Driver"></property>	
 		<property name="url" value="jdbc:postgresql://localhost:5432/gestionPortatiles"></property>
 		<property name="username" value="postgres"></property>
-		<property name="password" value="Juancarbc2001"></property>
+		<property name="password" value="root"></property>
 	</bean>
 	
 	<!-- Configuración del JPA -->

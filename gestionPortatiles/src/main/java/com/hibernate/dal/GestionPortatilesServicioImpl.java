@@ -46,10 +46,14 @@ public class GestionPortatilesServicioImpl implements GestionPortatilesServicio{
 		Query query = emPort.createQuery(jpql);
 		query.setParameter("idAlm", idAlum);
 		//Creamos una lista de alumnos con los valores obtenidos de la consulta
-        ArrayList<GestionAlumnos> listaAlumnos = (ArrayList<GestionAlumnos>) query.getResultList();
+        GestionAlumnos alumno = (GestionAlumnos) query.getResultList();
         //Obtenemos el portatil perteneciente a ese alumno con el método getPortatiles y lo devolvemos en el return 
-        GestionPortatiles portatiles = listaAlumnos.get(0).getPortatiles();
-        return portatiles;
+        GestionPortatiles portatil = new GestionPortatiles();
+        jpql = "SELECT portatil FROM GestionPortatiles portatil WHERE portatil.alumno = :alumno";
+		query = emPort.createQuery(jpql);
+		query.setParameter("alumno", alumno);
+		portatil=(GestionPortatiles)query.getResultList();
+        return portatil;
 		}catch(Exception e) {
 			System.out.println(e);
 			

@@ -79,7 +79,7 @@ public class Consultas {
 		return gpi.buscarPortatiles();
 	}
 
-	
+	@Transactional
 	public GestionPortatiles buscarOrdenadorPorIdAlumno(Integer idAlum) {
         return gpi.buscarOrdenadorporIdAlum(idAlum);
     }

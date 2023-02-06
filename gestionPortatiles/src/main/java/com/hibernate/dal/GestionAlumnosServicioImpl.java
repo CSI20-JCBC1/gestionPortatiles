@@ -87,9 +87,13 @@ public class GestionAlumnosServicioImpl implements GestionAlumnosServicio {
 			Query query = em.createQuery(jpql);
 			query.setParameter("idPortatil", idPortatil);
 			//Recogemos los datos de la query dentro de una lista
-			ArrayList<GestionPortatiles> listaPortatiles = (ArrayList<GestionPortatiles>) query.getResultList();
+			GestionPortatiles portatil = (GestionPortatiles) query.getResultList();
 			//Obtenemos el alumno resultante de la lista de los portatil con el método getAlumno y creamos un objeto alumno y lo devpolvemos en el return
-			GestionAlumnos alumnos = listaPortatiles.get(0).getAlumno();
+			GestionAlumnos alumnos = new GestionAlumnos();
+			jpql = "SELECT alumno FROM GestionAlumnos alumno WHERE alumno.portatiles = :portatiles";
+			query = em.createQuery(jpql);
+			query.setParameter("portatiles", portatil);
+			alumnos=(GestionAlumnos)query.getResultList();
 			return alumnos;
 
 		} catch (Exception e) {
